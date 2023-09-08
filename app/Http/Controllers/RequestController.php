@@ -6,6 +6,7 @@ use App\Models\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreRequestRequest;
 use App\Http\Requests\UpdateRequestRequest;
+use Illuminate\Http\Request as RequestHttp;
 
 class RequestController extends Controller
 {
@@ -49,6 +50,17 @@ class RequestController extends Controller
     public function edit(Request $request)
     {
         //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update($id, RequestHttp $request)
+    {
+        $req = Request::find($id);
+        $req->status = $request->status;
+        $req->save();
+        return $req;
     }
 
 

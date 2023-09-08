@@ -1,20 +1,37 @@
-<div class="modal" tabindex="-1">
+<div class="modal fade" id="modalStatus" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title"></h5>
+                <h5 class="modal-title" id="modalStatusTitle">Modal title</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <x-select-input style="width:100%" name='newStatus' label="Type" >
-                    <option value="Aberto">Aberto</option>
-                    <option value="Em andamento">Em andamento</option>
-                    <option value="Finalizado">Finalizado</option>
-                </x-select-input>
+                <div class="row">
+                    <x-input-label class="label-options">
+                        Status Atual:
+                    </x-input-label>
+                    <x-select-input id="modalStatusSelect" style="width:100%" name='newStatus' label="Type" >
+                        <option value="Aberto">Aberto</option>
+                        <option value="Em andamento">Em andamento</option>
+                        <option selected value="Finalizado">Finalizado</option>
+                    </x-select-input>
+                </div>
+                <div class="row">
+                    <x-input-label class="label-options">
+                        Mensagem
+                    </x-input-label>
+                    <textarea class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" name="message" id="modalStatusMessage"></textarea>
+                    <div id="captionSelect" class="form-text"></div>
+                </div>
+
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <x-secondary-button type="button" data-bs-dismiss="modal">
+                    Fechar
+                </x-secondary-button>
+                <x-primary-button id="modalStatusButton" type="button">
+                    Salvar
+                </x-primary-button>
             </div>
         </div>
     </div>

@@ -35,7 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('forms', FormController::class);
     Route::resource('questions', QuestionController::class);
     Route::resource('options', OptionController::class);
-    Route::resource('requests', RequestController::class);
+    Route::resource('requests', RequestController::class)->except(['update']);
     Route::resource('answers', AnswerController::class);
 
     Route::get('/answers/indexByForm/{id}', [AnswerController::class, 'indexByForm'])->name('answers.indexByForm');

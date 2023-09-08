@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\AnswerController;
+use App\Http\Controllers\RequestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +20,4 @@ use App\Http\Controllers\AnswerController;
 Route::get('/form/{name}', [FormController::class, 'indexByName']);
 Route::get('/form/byIndex/{index}', [FormController::class, 'indexByNumber']);
 Route::post('/form/response', [AnswerController::class, 'store']);
+Route::put('/requests/{request}', [RequestController::class, 'update']);

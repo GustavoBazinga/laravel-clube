@@ -7,14 +7,8 @@ function loadItem(){
     let begin = (thisPage - 1) * limit;
     let end = thisPage * limit - 1;
     list.forEach((item, index) => {
-        if(index >= begin && index <= end){
-            console.log("Hide");
-            item.style.display = 'block';
-        }else{
-            console.log("Show");
-            item.style.display = 'none';
-        }
-        console.log(index);
+        if(index >= begin && index <= end) item.style.display = 'block';
+        else item.style.display = 'none';
     });
     listPage();
 }
@@ -36,7 +30,18 @@ function listPage(){
         document.querySelector('.pagination').appendChild(li);
     }
 
-    for(let i = 1; i <= count; i++){
+    let start = 1;
+    let end = count;
+    if(count > 5){
+        if(thisPage > 2){
+            start = thisPage - 2;
+        }
+        if(thisPage < count - 2){
+            end = thisPage + 2;
+        }
+    }
+
+    for(let i = start; i <= end; i++){
         let li = document.createElement('li');
         li.innerHTML = `<a href="#" class="page-link">${i}</a>`;
         if(i === thisPage){
