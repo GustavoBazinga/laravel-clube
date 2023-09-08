@@ -1,0 +1,16 @@
+/* Estilo para o botão de remoção */
+.remove-button {
+    background-color: #707070; /* Cor de fundo vermelha */
+    color: #fff; /* Cor do texto branca */
+    border: none; /* Remove a borda */
+    padding: 5px 10px; /* Espaçamento interno */
+    cursor: pointer; /* Transforma o cursor em uma mãozinha ao passar por cima */
+    border-radius: 50%;
+    margin-top: 3%;
+
+}
+
+/* Estilo para o botão de remoção quando hover (passar o mouse por cima) */
+.remove-button:hover {
+    background-color: #303030; /* Cor de fundo vermelha mais escura */
+}
