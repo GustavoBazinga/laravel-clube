@@ -19,6 +19,11 @@ class FormController extends Controller
             $json = json_encode($forms);
             return $json;
         }
+        $forms->load('requests');
+        //Delete questions
+        // foreach ($forms as $form) {
+        //     unset($form->questions);
+        // }
         return view('form.index', compact('forms'));
 
     }
@@ -42,28 +47,15 @@ class FormController extends Controller
         return $form;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function dashboard($id)
     {
-        //
-    }
+        $form = Form::where('id', $id)->firstOrFail();
+        $form->load('requests.answers');
+        if($form->id == 1){
+            return view('form.dashboards.solicitacao', compact('form'));
+        }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreFormRequest $request)
-    {
-        //;
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Form $form)
-    {
-        //
+        return view('form.dashboards.notFoundDash', compact('form'));
     }
 
     /**

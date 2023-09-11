@@ -17,7 +17,7 @@ class QuestionSeeder extends Seeder
         DB::table('questions')->insert([
             'form_id' => 1,
             'question' => 'Qual o seu nome?',
-            'type' => 'longtext',
+            'type' => 'text',
             'created_at' => now(),
             'updated_at' => now(),
         ]);

@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('forms', FormController::class);
+    Route::get('forms/{form}/dashboard', [FormController::class, 'dashboard'])->name('forms.dashboard');
     Route::resource('questions', QuestionController::class);
     Route::resource('options', OptionController::class);
     Route::resource('requests', RequestController::class)->except(['update']);

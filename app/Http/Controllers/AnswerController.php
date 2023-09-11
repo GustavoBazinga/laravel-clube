@@ -9,6 +9,7 @@ use App\Http\Requests\StoreAnswerRequest;
 use App\Http\Requests\UpdateAnswerRequest;
 use Illuminate\Http\Request;
 use Mockery\Exception;
+use App\Http\Middleware\CodeBookConversor as CodeBook;
 
 class AnswerController extends Controller
 {
@@ -25,8 +26,22 @@ class AnswerController extends Controller
         $requests = Requests::where('form_id', $id)->get();
         $requests->load('answers.question');
 
+        if (is_object($requests)) {
+            foreach ($requests as $request) {
+                $request->statusCode = $request->status;
+                $request->status = CodeBook::getStateByCode($request->status)['status'];
+            }
+        }
 
-        return view('answer.index', compact('requests'));
+        $status = CodeBook::getStates();
+        $keys = array_keys($status);
+
+        foreach ($keys as $key) {
+            $status[$key] = CodeBook::getStateByName($key)['status'];
+        }
+
+
+        return view('answer.index')->with('requests', $requests)->with('status', $status);
 
 //        $answers = Answer::whereHas('request', function ($query) use ($id) {
 //            $query->where('form_id', $id);
@@ -50,7 +65,8 @@ class AnswerController extends Controller
         $requestCreated =Requests::create([
             'form_id' => $req['form_id'],
             'number' => $req['number'],
-            'name' => $req['name'] ?: ""
+            'name' => $req['name'] ?: "",
+            'status' => '1'
         ]);
         $requestId = $requestCreated['id'];
         $inserData = [];

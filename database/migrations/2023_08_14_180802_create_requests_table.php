@@ -15,11 +15,15 @@ return new class extends Migration
             $table->id();
             $table->string('number');
             $table->string('name');
-            $table->string('status')->default('Aberto')->nullable();
+            $table->string('status')->default("1")->nullable();
+            $table->string('area')->nullable();
+            $table->string('type')->nullable(); 
             //Form foreign key
             $table->unsignedBigInteger('form_id');
             $table->foreign('form_id')->references('id')->on('forms');
+            //Finished at
             $table->timestamps();
+            $table->timestamp('finalized_at')->nullable();
             $table->softDeletes();
         });
     }

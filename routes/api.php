@@ -20,4 +20,5 @@ use App\Http\Controllers\RequestController;
 Route::get('/form/{name}', [FormController::class, 'indexByName']);
 Route::get('/form/byIndex/{index}', [FormController::class, 'indexByNumber']);
 Route::post('/form/response', [AnswerController::class, 'store']);
+Route::get('/dashboard/{form}/{timeStart}/{timeEnd}', [RequestController::class, 'indexDashboard']);
 Route::put('/requests/{request}', [RequestController::class, 'update']);

@@ -7,51 +7,23 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreRequestRequest;
 use App\Http\Requests\UpdateRequestRequest;
 use Illuminate\Http\Request as RequestHttp;
+use App\Http\Middleware\CodeBookConversor as CodeBook;
+use App\Http\Services\RequestService;
 
 class RequestController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function indexDashboard($form, $timeStart = "", $timeEnd = ""){
+        $data = RequestService::indexDashboard($form, $timeStart, $timeEnd);
+        return $data;
+    }
+
     public function index()
     {
-
-
-        return view('request.index')->with('requests', Request::all());
+        $requests = Request::all();
+        $requests->load('answers');
+        return $requests;
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreRequestRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Request $request)
-    {
-        //
-    }
-
+    
     /**
      * Update the specified resource in storage.
      */
@@ -64,13 +36,4 @@ class RequestController extends Controller
     }
 
 
-
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Request $request)
-    {
-        //
-    }
 }

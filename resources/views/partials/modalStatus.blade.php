@@ -11,9 +11,9 @@
                         Status Atual:
                     </x-input-label>
                     <x-select-input id="modalStatusSelect" style="width:100%" name='newStatus' label="Type" >
-                        <option value="Aberto">Aberto</option>
-                        <option value="Em andamento">Em andamento</option>
-                        <option selected value="Finalizado">Finalizado</option>
+                        @foreach($status as $item)
+                            <option value="{{ $loop->iteration }}">{{ $item }}</option>
+                        @endforeach          
                     </x-select-input>
                 </div>
                 <div class="row">
@@ -23,7 +23,6 @@
                     <textarea class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" name="message" id="modalStatusMessage"></textarea>
                     <div id="captionSelect" class="form-text"></div>
                 </div>
-
             </div>
             <div class="modal-footer">
                 <x-secondary-button type="button" data-bs-dismiss="modal">

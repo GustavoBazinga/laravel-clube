@@ -16,7 +16,7 @@
                                     <h2 class="accordion-header" id="heading{{ $item->id }}">
                                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $item->id }}" aria-expanded="true" aria-controls="collapse{{ $item->id }}">
                                             Requisição #{{ $item->id }}
-                                            <span class="badge {{ $item->status == "Aberto" ? 'bg-success' : ($item->status == "Em andamento" ? "bg-warning" : "bg-info") }} ml-3">{{ $item->status }}</span>
+                                            <span class="badge {{ $item->status == 'Aberto' ? 'bg-success' : ($item->status == "EmAndamento" ? "bg-warning" : "bg-info") }} ml-3">{{ $item->status }}</span>
                                         </button>
                                     </h2>
                                     <div id="collapse{{ $item->id }}" class="accordion-collapse collapse" aria-labelledby="heading{{ $item->id }}" data-bs-parent="#accordionExample">
@@ -50,7 +50,7 @@
         </div>
     </div>
 
-    @include('partials.modalStatus')
+    @include('partials.modalStatus', $status)
 
     <x-slot name="script">
         <script src="{{ asset('js/pagination.js') }}"></script>
