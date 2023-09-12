@@ -34,8 +34,9 @@ $(document).ready(function(){
         let number = $('#modalNumber').val() + '@c.us';
         let area = $('#modalArea').val();
         let type = $('#modalType').val();
-
         let id = $('#modalTitle').html().split('#')[1];
+
+        message = message !== '' ? "Atenção! Sua requisição " + id + " foi atualizada.\n" + message : '';
 
         $.ajax({
             url: "http://192.168.100.20/api/request/" + id,
