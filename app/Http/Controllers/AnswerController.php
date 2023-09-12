@@ -23,8 +23,15 @@ class AnswerController extends Controller
 
     public function indexByForm($id)
     {
-        $requests = Requests::where('form_id', $id)->get();
-        $requests->load('answers.question');
+        //Get all requests by form with trash
+        $requests = Requests::where('form_id', $id)->with(['answers' => function ($query) {
+            $query->withTrashed()->with(['question' => function ($query) {
+                $query->withTrashed();
+            }]);
+        }])->get();
+
+
+        // return $requests;
 
         if (is_object($requests)) {
             foreach ($requests as $request) {
@@ -41,12 +48,12 @@ class AnswerController extends Controller
         }
 
 
-        return view('answer.index')->with('requests', $requests)->with('status', $status);
+        return view('answer.index')->with('requests', $requests)->with('options', $status);
 
-//        $answers = Answer::whereHas('request', function ($query) use ($id) {
-//            $query->where('form_id', $id);
-//        })->get()->groupBy('request_id');
-//        return view('answer.index', compact('answers'));
+       $answers = Answer::whereHas('request', function ($query) use ($id) {
+           $query->where('form_id', $id);
+       })->get()->groupBy('request_id');
+       return view('answer.index', compact('answers'));
     }
 
     /**
@@ -90,6 +97,8 @@ class AnswerController extends Controller
             ];
         }
         Answer::insert($inserData);
+
+        return $requestCreated;
     }
     /**
      * Remove the specified resource from storage.

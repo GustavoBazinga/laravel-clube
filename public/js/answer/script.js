@@ -1,56 +1,46 @@
 $(document).ready(function(){
-    $('.upStatus').click(function(){
+    $('.upRequest').click(function(){
         //Find the parent element with the class accordion-item
         let parent = $(this).parents('.accordion-item');
         let id = parent.data('id');
-        let status = parent.data('status');
-        let number = parent.data('number');
-
-
-        //Open the modal
-        $('#modalStatus').modal('show');
-        $('#modalStatusTitle').html(`Atualização de Status para a requisição #${id}`);
-        $('#captionSelect').html(`Ao clicar em salvar, a mensagem será enviada para o número ${number.split('@')[0]}`);
-        $('#modalStatusSelect').find('option').each(function(){
-            if($(this).val() === status){
-                $(this).attr('selected', true);
-            }else{
-                $(this).attr('selected', false);
-            }
-        });
-    });
-
-    $('#modalStatusSelect').change(function(){
-        let newStatus = $(this).val();
-        let id = $('#modalStatusTitle').html().split('#')[1];
-        if (newStatus === "Em andamento") {
-            $('#modalStatusMessage').val(`Olá, sua requisição #${id} está em andamento. Aguarde por mais informações.`);
-        } else if (newStatus === "Finalizado") {
-            $('#modalStatusMessage').val(`Olá, sua requisição #${id} foi finalizada. Obrigado por utilizar nossos serviços.`);
-        }
-
-    });
-
-    $('#modalStatus').on('hidden.bs.modal', function(){
-        $('#modalStatusMessage').val('');
-        $('#modalStatusTitle').html('');
-    });
-
-    $('#modalStatusButton').click(function(){
-        let newStatus = $('#modalStatusSelect').val();
-        let id = $('#modalStatusTitle').html().split('#')[1];
-        var message = $('#modalStatusMessage').val();
-        var caption = $('#captionSelect').html().split(' ');
-        var number = caption[caption.length - 1] + '@c.us';
-
-        console.log({number: number, message: message });
-
-
 
         $.ajax({
-            url: "http://192.168.100.20/api/requests/" + id,
+            url: "http://192.168.100.20/api/request/" + id,
+            method: 'GET',
+            success: function(data){
+                $('#modalTitle').html(`Atualizar requisição #${data.id}`);
+                
+                $('#modalName').val(data.name);
+                $('#modalNumber').val((data.number.replace('@c.us', '')));
+                //Find the option with the value of the data
+                $('#modalStatus option[value="' + data.status + '"]').attr('selected', 'selected');
+                $('#modalArea').val(data.area);
+                $('#modalType').val(data.type);
+            },
+            error: function(err){
+                alert("Erro ao buscar requisição\n" + err);
+            }
+        })
+        //Open the modal
+        $('#modalStatusWindow').modal('show');
+    });
+
+
+    $('#modalStatusButton').click(function(){
+
+        let status = $('#modalStatus').val();
+        let message = $('#modalMessage').val();
+        let name = $('#modalName').val();
+        let number = $('#modalNumber').val() + '@c.us';
+        let area = $('#modalArea').val();
+        let type = $('#modalType').val();
+
+        let id = $('#modalTitle').html().split('#')[1];
+
+        $.ajax({
+            url: "http://192.168.100.20/api/request/" + id,
             method: 'PUT',
-            data: { status: newStatus },
+            data: { status: status, area: area, type: type, name: name },
             success: function(data){
                 if (message !== ''){
                     $.ajax({

@@ -40,7 +40,7 @@ class QuestionController extends Controller
      */
     public function show(Question $question)
     {
-        //
+        
     }
 
     /**
@@ -62,6 +62,9 @@ class QuestionController extends Controller
         //Compare question with old_questions and remove all not match
 
         foreach ($questions as $question){
+            if (!is_array($request->old_questions)){
+                $request->old_questions = [];
+            }
             //Check if question is in old_questions
             if(!in_array($question->id, array_keys($request->old_questions))){
                 //Delete question

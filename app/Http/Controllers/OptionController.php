@@ -55,6 +55,18 @@ class OptionController extends Controller
             $question->options = $options;
         }
 
+        //Convert to array
+        // $questions = $questions->toArray();
+
+
+        // return $questions;
+
+        // usort($questions, function($a, $b) {
+        //     $a_next_id = $a->options->firstWhere('value', $a->answer)->next_question_id ?? null;
+        //     $b_next_id = $b->options->firstWhere('value', $b->answer)->next_question_id ?? null;
+        //     return $a_next_id <=> $b_next_id;
+        // });
+
         return view('option.edit', compact('questions', 'form'));
 
     }
@@ -110,6 +122,8 @@ class OptionController extends Controller
                 }
             }
         }
+
+        return redirect()->route('forms.index');
 
 
     }

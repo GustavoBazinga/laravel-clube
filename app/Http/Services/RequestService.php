@@ -24,7 +24,7 @@ class RequestService  {
             '10' => ['out', 'outubro'],
             '11' => ['nov', 'novembro'],
             '12' => ['dez', 'dezembro'],
-          ];
+        ];
     
         public static function indexDashboard($form, $timeStart = "", $timeEnd = "") {
             $requests = Request::where('form_id', $form)->get();
@@ -62,13 +62,13 @@ class RequestService  {
                 $totalByType[$key] = $value->count();
             }
 
-            //By month
+            
             $months = self::get_last_month_list();
 
             $totalByMonth = [];
 
             foreach ($months as $month) {
-                $totalByMonth[self::$months[explode("-", $month)[1]][0]] = $requests->whereBetween('created_at', [$month . '-01', $month . '-31'])->count();
+                $totalByMonth[self::$months[explode("-", $month)[1]][1]] = $requests->whereBetween('created_at', [$month . '-01', $month . '-31'])->count();
                 // $totalByMonth[$month] = $requests->whereBetween('created_at', [$month . '-01', $month . '-31'])->count();
             }
 

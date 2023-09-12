@@ -142,7 +142,6 @@
                 fetch(`http://192.168.100.20/api/dashboard/{{ $form->id }}/${dataInicioInput.value}/${dataFinalInput.value}`)
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data);
                     document.getElementById('dataInicio').innerHTML = (dataInicioInput.value).split('-').reverse().join('/');
                     document.getElementById('dataFinal').innerHTML = (dataFinalInput.value).split('-').reverse().join('/');
                     document.getElementById('totalRequest').innerHTML = data.total;

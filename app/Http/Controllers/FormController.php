@@ -36,7 +36,7 @@ class FormController extends Controller
         return Form::where('name', $name)->firstOrFail();
     }
 
-    public function indexByNumber($index)
+    public function indexByIndex($index)
     {
         $index = (int) $index - 1;
         $form = json_decode($this->index(true));

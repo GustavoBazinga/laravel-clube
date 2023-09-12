@@ -23,6 +23,12 @@ class RequestController extends Controller
         $requests->load('answers');
         return $requests;
     }
+
+    public function show($id)
+    {
+        $request = Request::find($id);
+        return $request;
+    }
     
     /**
      * Update the specified resource in storage.
@@ -31,6 +37,10 @@ class RequestController extends Controller
     {
         $req = Request::find($id);
         $req->status = $request->status;
+        $req->type = $request->type;
+        $req->area = $request->area;
+        $req->name = $request->name;
+        if ($request->status == CodeBook::Finalizado) $req->finalized_at = now();
         $req->save();
         return $req;
     }

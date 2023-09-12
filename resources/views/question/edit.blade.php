@@ -32,7 +32,7 @@
                                                 <option value="longtext" {{ $question->type == "longtext" ? 'selected' : '' }}>Texto Longo</option>
                                                 <option value="select" {{ $question->type == "select" ? 'selected' : '' }} >Seleção</option>
                                                 <option value="email" {{ $question->type == "email" ? 'selected' : '' }}>E-mail</option>
-                                                <option value="number" {{ $question->type == "number" ? 'selected' : '' }}>Quantidade </option>
+                                                <option value="number" {{ $question->type == "number" ? 'selected' : '' }}>Número </option>
                                                 <option value="date" {{ $question->type == "date" ? 'selected' : '' }}>Data</option>
                                                 <option value="telephone" {{ $question->type == "telephone" ? 'selected' : '' }}>Telefone</option>
                                             </x-select-input>

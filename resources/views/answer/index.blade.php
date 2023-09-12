@@ -12,10 +12,10 @@
                         <div class="p-6 question-container">
                             <div class="accordion accordion-flush list" id="accordionExample">
                             @foreach($requests as $item)
-                                <div class="accordion-item item" data-id="{{ $item->id }}" data-status="{{ $item->status }}" data-number="{{ $item->number }}">
+                                <div class="accordion-item item" data-id="{{ $item->id }}">
                                     <h2 class="accordion-header" id="heading{{ $item->id }}">
                                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $item->id }}" aria-expanded="true" aria-controls="collapse{{ $item->id }}">
-                                            Requisição #{{ $item->id }}
+                                            Requisição #{{ $item->id }} @if($item->name != "") - {{ $item->name }} @endif
                                             <span class="badge {{ $item->status == 'Aberto' ? 'bg-success' : ($item->status == "EmAndamento" ? "bg-warning" : "bg-info") }} ml-3">{{ $item->status }}</span>
                                         </button>
                                     </h2>
@@ -28,7 +28,7 @@
                                                     @endforeach
                                                 </div>
                                                 <div class="col-4">
-                                                    <x-primary-button class="upStatus">Atualizar Status</x-primary-button>
+                                                    <x-primary-button class="upRequest">Atualizar Requisição</x-primary-button>
                                                 </div>
                                             </div>
                                         </div>
@@ -50,11 +50,10 @@
         </div>
     </div>
 
-    @include('partials.modalStatus', $status)
+    @include('partials.modal.modalRequest', $options)
 
     <x-slot name="script">
         <script src="{{ asset('js/pagination.js') }}"></script>
         <script src="{{ asset('js/answer/script.js') }}"></script>
-
     </x-slot>
 </x-app-layout>
