@@ -1,0 +1,7 @@
+.matched {
+    display: block;
+}
+
+.unmatched {
+    display: none;
+}

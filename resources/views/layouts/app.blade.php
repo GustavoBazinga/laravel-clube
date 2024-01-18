@@ -6,7 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'Laravel') }}</title>
-
+        @notifyCss
         <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <!-- Fonts -->
@@ -41,6 +41,7 @@
 
            <!-- This is an example component -->
                 <div class="max-w-2xl mx-auto text-white py-10">
+                    <x-notify::notify />
                     
                     <div class="mt-28 flex flex-col md:flex-row md:justify-between items-center text-sm text-gray-400">
                         <p class="order-2 md:order-1 mt-8 md:mt-0"> &copy; Gustavo Alves, 2023. </p>
@@ -52,6 +53,7 @@
         <!-- Scripts -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        @notifyJs
         {{ $script ?? null }}
 
     </body>

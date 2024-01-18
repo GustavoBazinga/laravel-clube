@@ -1,12 +1,40 @@
-const limit = 10;
-const list = [...document.querySelectorAll('.list .item')];
+let limit = 10;
+let list;
+let lastSearch = '';
+const search = document.querySelector('#search');
+
+search.addEventListener('keyup', () => {
+    loadItem();
+});
+
 
 const loadItem = () => {
+    list = [...document.querySelectorAll('.item')];
+    const searchValue = search.value.toLowerCase();
     const begin = (thisPage - 1) * limit;
     const end = thisPage * limit - 1;
-    list.forEach((item, index) => {
-        item.style.display = index >= begin && index <= end ? 'block' : 'none';
-    });
+    if (searchValue == '') {
+        list.forEach((item, index) => {
+            item.classList.remove('matched', 'unmatched');
+            item.classList.add(index >= begin && index <= end ? 'matched' : 'unmatched')
+        })
+    }
+    else {
+        list.forEach((item, index) => {
+            item.classList.remove('matched');
+            item.classList.add('unmatched')
+        });
+        list = list.filter(item => item.innerHTML.toLowerCase().includes(searchValue));
+        list.forEach((item, index) => {
+            item.classList.remove('matched');
+            item.classList.remove('unmatched');
+            item.classList.add(index >= begin && index <= end ? 'matched' : 'unmatched')
+        })
+        if (lastSearch !== searchValue) {
+            thisPage = 1;
+            lastSearch = searchValue;
+        }
+    }
     updatePagination();
 };
 
@@ -16,6 +44,8 @@ const updatePagination = () => {
     pagination.innerHTML = '';
 
     if (thisPage !== 1) {
+        const liFirst = createPageLink("Primeiro", 1);
+        pagination.appendChild(liFirst);
         const li = createPageLink('Anterior', thisPage - 1);
         pagination.appendChild(li);
     }
@@ -36,6 +66,8 @@ const updatePagination = () => {
     if (thisPage !== count) {
         const li = createPageLink('Próximo', thisPage + 1);
         pagination.appendChild(li);
+        const liLast = createPageLink("Último", count);
+        pagination.appendChild(liLast);
     }
 };
 
@@ -49,6 +81,8 @@ const createPageLink = (text, page) => {
     });
     return li;
 };
+
+
 
 let thisPage = 1;
 loadItem();

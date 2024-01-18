@@ -14,11 +14,11 @@ class DatabaseSeeder extends Seeder
     {
         // WithoutModelEvents::class;
         $this->call([
-            UserSeeder::class,
-            FormSeeder::class,
-            QuestionSeeder::class,
-            OptionSeeder::class,
-
+            // UserSeeder::class,
+            // FormSeeder::class,
+            // QuestionSeeder::class,
+            // OptionSeeder::class,
+            WorkerSeeder::class,
         ]);
     }
 }

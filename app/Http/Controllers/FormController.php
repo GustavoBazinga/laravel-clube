@@ -58,6 +58,18 @@ class FormController extends Controller
         return view('form.dashboards.notFoundDash', compact('form'));
     }
 
+    public function create(){
+        return self::store();
+    }
+
+    public function store()
+    {
+        $form = Form::create([
+            'title' => "Formulário Sem Título",
+        ]);
+        return redirect()->route('forms.edit', $form);
+    }
+
     /**
      * Show the form for editing the specified resource.
      */
