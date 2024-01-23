@@ -16,7 +16,7 @@ $(document).ready(function() {
         let dataSport;
 
         $.ajax({
-            url: 'http://192.168.100.20/api/clubex/sport/' + id,
+            url: '/api/clubex/sport/' + id,
             type: 'GET',
             dataType: 'json',
             success: function(data) {

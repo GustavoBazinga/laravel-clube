@@ -11,11 +11,14 @@
         {{ route('professors.update', '1') }}
     </x-slot>
 
+    
+
     <x-slot name="idForm">
         {{ 'formEditProfessor' }}
     </x-slot>
 
     <x-slot name="form">
+        @method('PUT')
         @include('clubex.professor.partials.form')
     </x-slot>
 

@@ -44,7 +44,7 @@
                     <x-notify::notify />
                     
                     <div class="mt-28 flex flex-col md:flex-row md:justify-between items-center text-sm text-gray-400">
-                        <p class="order-2 md:order-1 mt-8 md:mt-0"> &copy; Gustavo Alves, 2023. </p>
+                        <p class="order-2 md:order-1 mt-8 md:mt-0"> &copy; Gustavo Alves, 2024. </p>
                         
                     </div>
                 </div>

@@ -16,7 +16,7 @@ $(document).ready(function() {
         let dataSport;
 
         $.ajax({
-            url: 'http://192.168.100.20/api/clubex/professors/' + id,
+            url: '/api/clubex/professors/' + id,
             type: 'GET',
             dataType: 'json',
             success: function(data) {

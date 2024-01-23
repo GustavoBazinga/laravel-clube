@@ -80,12 +80,20 @@ class SportClassController extends Controller
     {
         try {
             $input = $request->all();
+            $days = $request->input('days');
+            
+
+            //Convert the days array to string
+            $days = implode(",", $days);
+
+            $input['day'] = $days;
 
             $sportClass = SportClass::create($input);
     
             notify()->success('Turma criada com sucesso!');
         }
         catch (\Exception $e) {
+            dd($e);
             notify()->error('Erro ao criar turma!');
         }
         return redirect()->route('sportsClass.index');
@@ -113,6 +121,7 @@ class SportClassController extends Controller
     public function update(Request $request)
     {
         $input = $request->all();
+        $input['day'] = implode(",", $request->input('days'));
         $original = $request->input('originalClass');
         $original = explode("_", strval($original));
         $old_sport_id = $original[0];
@@ -140,6 +149,7 @@ class SportClassController extends Controller
             notify()->success('Turma atualizada com sucesso!');
 
         } catch (\Exception $e) {
+            dd($e);
             notify()->error('Erro ao atualizar turma!');
         }
 

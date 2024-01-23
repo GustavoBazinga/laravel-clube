@@ -10,12 +10,13 @@
     <x-slot name="route">
         {{ route('sports.update', '1') }}
     </x-slot>
-
+    
     <x-slot name="idForm">
         {{ 'formEditSport' }}
     </x-slot>
 
     <x-slot name="form">
+        @method('PUT')
         @include('clubex.sport.partials.form')
     </x-slot>
 

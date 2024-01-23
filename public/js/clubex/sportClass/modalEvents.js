@@ -5,7 +5,7 @@ $(document).ready(function() {
         modal = $('#modalCreateSportClass');
         resetForm();
         $.ajax({
-            url: 'http://192.168.100.20/api/clubex/sportClass/sports/professors',
+            url: '/api/clubex/sportClass/sports/professors',
             type: 'GET',
             dataType: 'json',
             success: function(data) {
@@ -45,7 +45,7 @@ $(document).ready(function() {
         event.preventDefault();
         let sportId = $(this).val();
         $.ajax({
-            url: 'http://192.168.100.20/api/clubex/sport/getImage/' + sportId,
+            url: '/api/clubex/sport/getImage/' + sportId,
             type: 'GET',
             success: function(data) {
                 console.log(data)
@@ -61,7 +61,7 @@ $(document).ready(function() {
         event.preventDefault();
         let professorId = $(this).val();
         $.ajax({
-            url: 'http://192.168.100.20/api/clubex/professor/getImage/' + professorId,
+            url: '/api/clubex/professor/getImage/' + professorId,
             type: 'GET',
             success: function(data) {
                 console.log(data)
@@ -87,7 +87,7 @@ $(document).ready(function() {
         let hour = data[3];
 
         $.ajax({
-            url: 'http://192.168.100.20/api/clubex/sportClass/getSpecified',
+            url: '/api/clubex/sportClass/getSpecified',
             type: 'GET',
             data: {
                 sport_id: sport_id,
@@ -122,9 +122,19 @@ $(document).ready(function() {
                 modal.find('.slotsClass').val(data.class.slots);
                 modal.find('.priceClass').val(data.class.price);
 
-                modal.find('.dayClass option').each(function() {
-                    if ($(this).val() == day)
-                        $(this).attr('selected', true);
+                days = data.class.day.split(',');
+
+                console.log(days);
+
+                days.forEach(day => {
+                    modal.find('.dayClass').each(function() {
+                        console.log($(this).html());
+                        if ($(this).val() == day) {
+                            console.log($(this).val());
+                            console.log("====")
+                            this.checked = true;
+                        }
+                    })
                 });
 
                 modal.find('.nameClass').val(data.class.name);
@@ -190,7 +200,13 @@ $(document).ready(function() {
         //Reset all input elements
         $('.form').each(function() {
             $(this).find('input').each(function() {
-                $(this).val('')
+                if (!this.classList.contains('form-check-input')){
+                    $(this).val('');
+                }
+                else {
+                    this.checked = false;
+
+                }
             });
         });
 
